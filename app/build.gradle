@@ -1,0 +1,105 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+    id 'kotlinx-serialization'
+}
+
+android {
+    namespace 'com.example.android.mentiontext'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.android.mentiontext"
+        minSdk 28
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.2"
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    // Import the Compose BOM
+    //Don't update without making sure intercom works. it crashes on 1.4.0
+//    implementation platform('androidx.compose:compose-bom:2023.03.00')
+//    implementation "androidx.compose.ui:ui-tooling:1.4.0"
+//    implementation "androidx.compose.ui:ui-util:1.4.0"
+
+    implementation platform('androidx.compose:compose-bom:2023.01.00')
+    implementation 'androidx.compose.foundation:foundation:1.4.1'
+
+    implementation "androidx.compose.ui:ui-tooling:1.4.1"
+    implementation "androidx.compose.ui:ui-util:1.4.1"
+
+    implementation 'androidx.compose.material3:material3'
+    implementation 'androidx.compose.material:material'
+
+    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.constraintlayout:constraintlayout-compose:1.0.1'
+
+    //coil
+    implementation "io.coil-kt:coil:$coil_version"
+    implementation("io.coil-kt:coil-compose:$coil_version")
+    implementation("io.coil-kt:coil-gif:$coil_version")
+
+    //shimmer
+    implementation "com.google.accompanist:accompanist-placeholder-material:0.18.0"
+
+    // kotlin based dependency injection dagger hilt
+    // Hilt and Navigation
+    implementation 'com.google.dagger:hilt-android:2.44'
+    kapt('com.google.dagger:hilt-android-compiler:2.44')
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+
+
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    //PAGING
+    implementation 'androidx.paging:paging-common-ktx:3.1.1'
+    implementation 'androidx.paging:paging-compose:1.0.0-alpha18'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1'
+
+
+}
